@@ -32,6 +32,14 @@ interface Middleware
     public static function instanceName($options);
 
     /**
+     * It will be called in if there is instance request exclude first one.
+     * Unlike __construct, there is likely to be run more than once.
+     *
+     * @param array $options
+     */
+    public function setUp($options);
+
+    /**
      * Return the Value of Key. If key does not found, return the false.
      *
      * @param string $key

@@ -14,9 +14,9 @@ use pcache\TTL;
  * @see \pcache\Cache::instance()
  *
  * options:
- *     OPEN_KEY (requires) integer (1 <= $openKey <= 65535) : shmop's key
- *     SIZE_KEY (optional) integer (0 < $sizeKey) : shared memory size at first time.
- *     AUTO_DELETE (optional) bool (default: false) : If it is true, auto delete on destructor.
+ *     key         (require)  integer (1 <= $openKey <= 65535) : shmop's key
+ *     size        (optional) integer (0 < $sizeKey)           : shared memory size at first time.
+ *     auto_delete (optional) bool (default: false)            : If it is true, auto delete on destructor.
  */
 class SharedMemory implements Middleware
 {
@@ -64,23 +64,30 @@ class SharedMemory implements Middleware
     public static function validate($options)
     {
         if (!isset($options[self::OPEN_KEY])) {
-            throw new \RuntimeException(__METHOD__ . " MUST need the option of " . self::OPEN_KEY);
+            throw new \RuntimeException(__CLASS__ . " MUST need the option of " . self::OPEN_KEY);
         }
         $openKey = $options[self::OPEN_KEY];
         if (!(is_int($openKey) && $openKey >= 1 && $openKey <= 65535)) {
-            throw new \RuntimeException(__METHOD__ . " " . self::OPEN_KEY . " type MUST be range of 1 to 65535");
+            throw new \RuntimeException(__CLASS__ . " " . self::OPEN_KEY . " type MUST be range of 1 to 65535");
         }
         if (isset($options[self::SIZE_KEY]) && !is_int($options[self::SIZE_KEY])) {
-            throw new \RuntimeException(__METHOD__ . " " . self::SIZE_KEY . " type MUST be integer");
+            throw new \RuntimeException(__CLASS__ . " " . self::SIZE_KEY . " type MUST be integer");
         }
         if (isset($options[self::AUTO_DELETE]) && !is_bool($options[self::AUTO_DELETE])) {
-            throw new \RuntimeException(__METHOD__ . " " . self::AUTO_DELETE . " type MUST be boolean");
+            throw new \RuntimeException(__CLASS__ . " " . self::AUTO_DELETE . " type MUST be boolean");
         }
     }
 
     public static function instanceName($options)
     {
         return strval(@$options[self::OPEN_KEY]);
+    }
+
+    public function setUp($options)
+    {
+        if (isset($options[self::AUTO_DELETE])) {
+            $this->isAutoDelete = $this->isAutoDelete || $options[self::AUTO_DELETE];
+        }
     }
 
     public function deleteAll()
