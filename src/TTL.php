@@ -5,6 +5,11 @@
 
 namespace pcache;
 
+/**
+ * TTL (Time To Live)
+ * @see \pcache\Cache::ttl()
+ * @see \pcache\Cache::set()
+ */
 class TTL
 {
     const DAY = 24 * self::HOUR;

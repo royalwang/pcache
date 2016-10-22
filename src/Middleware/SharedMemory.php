@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @copyright 2016 Hinagiku Soranoba All Rights Reserved.
  */
@@ -9,6 +8,16 @@ namespace pcache\Middleware;
 use pcache\Middleware;
 use pcache\TTL;
 
+/**
+ * Class SharedMemory
+ *
+ * @see \pcache\Cache::instance()
+ *
+ * options:
+ *     OPEN_KEY (requires) integer (1 <= $openKey <= 65535) : shmop's key
+ *     SIZE_KEY (optional) integer (0 < $sizeKey) : shared memory size at first time.
+ *     AUTO_DELETE (optional) bool (default: false) : If it is true, auto delete on destructor.
+ */
 class SharedMemory implements Middleware
 {
     const OPEN_KEY = "key";
@@ -30,7 +39,7 @@ class SharedMemory implements Middleware
     private $openKey;
     private $isAutoDelete = false;
 
-    public function __construct($options)
+    public function __construct(array $options)
     {
         $this->size = @$options[self::SIZE_KEY] ?: self::DEFAULT_SIZE;
         $this->openKey = $options[self::OPEN_KEY];

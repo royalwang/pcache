@@ -5,6 +5,11 @@
 
 namespace pcache;
 
+/**
+ * Cache class.
+ *
+ * @see \pcache\Cache::instance()
+ */
 class Cache
 {
     /**
@@ -26,7 +31,7 @@ class Cache
 
     /**
      * Return the Singleton Object.
-     * @return static
+     * @return Cache
      */
     public static function instance($middleware, $options)
     {
@@ -40,35 +45,70 @@ class Cache
         }
     }
 
-    public function deleteAll()
-    {
-        $this->middleware->deleteAll();
-    }
-
+    /**
+     * Return the Value of Key. If key does not found, return the false.
+     *
+     * @param string $key
+     * @return string|boolean
+     */
     public function get($key)
     {
         return $this->middleware->get($key);
     }
 
+    /**
+     * Return all key-values.
+     * @return string[string]
+     */
+    public function getAll()
+    {
+        return $this->middleware->getAll();
+    }
+
+    /**
+     * Set (insert or update) to the key-value.
+     *
+     * @param string $key
+     * @param string $value
+     * @param int $ttl
+     */
     public function set($key, $value, $ttl = TTL::INFINITY)
     {
         $this->middleware->set($key, $value, $ttl);
     }
 
-    public function delete($key)
-    {
-        $this->middleware->delete($key);
-    }
-
+    /**
+     * update Time To Live.
+     *
+     * @param string $key
+     * @param int $ttl
+     */
     public function ttl($key, $ttl = TTL::INFINITY)
     {
         $this->middleware->ttl($key, $ttl);
     }
 
-    public function getAll()
+    /**
+     * delete the key-value.
+     *
+     * @param string $key
+     */
+    public function delete($key)
     {
-        return $this->middleware->getAll();
+        $this->middleware->delete($key);
     }
+
+    /**
+     * delete all key-values.
+     */
+    public function deleteAll()
+    {
+        $this->middleware->deleteAll();
+    }
+
+    //==========================================================================================================//
+    // Private Functions
+    //==========================================================================================================//
 
     /**
      * @param $middleware
