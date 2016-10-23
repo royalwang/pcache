@@ -98,8 +98,6 @@ class Redis implements Middleware
     {
         if ($ttl == TTL::INFINITY) {
             $this->redis->set($key, $value);
-        } elseif ($ttl == TTL::NO_CHANGE) {
-            $this->redis->set($key, $value, array('nx', 'ex'=> 0));
         } else {
             $this->redis->set($key, $value, $ttl);
         }

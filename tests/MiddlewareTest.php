@@ -46,16 +46,6 @@ abstract class MiddlewareTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $this->cache->get($key));
     }
 
-    public function testExpireNoChange()
-    {
-        $key = __METHOD__;
-        $value = "test_value";
-        $this->cache->set($key, $value, 1 * TTL::SEC);
-        $this->cache->set($key, $value, TTL::NO_CHANGE);
-        sleep(2);
-        $this->assertEquals(false, $this->cache->get($key));
-    }
-
     public function testTtl()
     {
         $key = __METHOD__;

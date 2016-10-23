@@ -18,5 +18,4 @@ class TTL
     const SEC = 1;
 
     const INFINITY = -1;
-    const NO_CHANGE = -2;
 }

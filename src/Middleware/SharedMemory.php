@@ -174,8 +174,6 @@ class SharedMemory implements Middleware
     {
         if ($ttl == TTL::INFINITY) {
             $obj[$key] = [self::VALUE => $value];
-        } elseif ($ttl == TTL::NO_CHANGE) {
-            $obj[$key][self::VALUE] = $value;
         } elseif (isset($obj[$key][self::EXPIRES]) && $obj[$key][self::EXPIRES] < time()) {
             unset($obj[$key]);
         } elseif ($ttl > 0) {
