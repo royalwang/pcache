@@ -36,7 +36,7 @@ class Memcache implements Middleware
     public static function instanceName($options)
     {
         $servers = @$options[self::SERVERS_KEY] ?: array();
-        usort($servers, function($a, $b) {
+        usort($servers, function ($a, $b) {
             // FIXME: this is memcached format...=(
             if (!(is_array($a) && count($a) == 3 && is_array($b) && count($b) == 3)) {
                 return 0; // invalid. So, it may be what the return value.
@@ -82,7 +82,7 @@ class Memcache implements Middleware
         $ret = array();
         $items = $this->memcache->getStats("items");
         if (isset($items["items"])) {
-            foreach($items["items"] as $slabId => $item) {
+            foreach ($items["items"] as $slabId => $item) {
                 if (!($cacheDump = $this->memcache->getStats("cachedump", $slabId, $item["number"]))) {
                     continue;
                 }

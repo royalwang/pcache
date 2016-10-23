@@ -1,8 +1,16 @@
 {
     "name": "soranoba/pcache",
-    "description": "Cache library that supports multiple middleware",
+    "description": "Cache library wrapper that supports multiple middleware (Shared Memory, Redis, Memcached) with PHP.",
+    "keywords": ["pcache", "cache", "redis", "memcached"],
     "type": "library",
+    "homepage": "http://github.com/soranoba/pcache",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Hinagiku Soranoba",
+            "email": "soranoba@gmail.com"
+        }
+    ],
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.6",
