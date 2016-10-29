@@ -3,15 +3,15 @@
  * @copyright 2016 Hinagiku Soranoba All Rights Reserved.
  */
 
-namespace pcache\Middleware;
+namespace Soranoba\Pcache\Middleware;
 
-use pcache\Middleware;
-use pcache\TTL;
+use Soranoba\Pcache\Middleware;
+use Soranoba\Pcache\TTL;
 
 /**
  * Class SharedMemory
  *
- * @see \pcache\Cache::instance()
+ * @see \Soranoba\Pcache\Cache::instance()
  *
  * options:
  *     key         (require)  integer (1 <= $openKey <= 65535) : shmop's key

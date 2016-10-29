@@ -3,12 +3,12 @@
  * @copyright 2016 Hinagiku Soranoba All Rights Reserved.
  */
 
-namespace pcache;
+namespace Soranoba\Pcache;
 
 /**
  * TTL (Time To Live)
- * @see \pcache\Cache::ttl()
- * @see \pcache\Cache::set()
+ * @see \Soranoba\Pcache\Cache::ttl()
+ * @see \Soranoba\Pcache\Cache::set()
  */
 class TTL
 {

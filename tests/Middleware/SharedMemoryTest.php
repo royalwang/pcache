@@ -4,11 +4,11 @@
  * @copyright 2016 Hinagiku Soranoba All Rights Reserved.
  */
 
-namespace Tests\pcache\Middleware;
+namespace Tests\Soranoba\Pcache\Middleware;
 
-use pcache\Cache;
-use pcache\Middleware\SharedMemory;
-use Tests\pcache\MiddlewareTest;
+use Soranoba\Pcache\Cache;
+use Soranoba\Pcache\Middleware\SharedMemory;
+use Tests\Soranoba\Pcache\MiddlewareTest;
 
 class SharedMemoryTest extends MiddlewareTest
 {

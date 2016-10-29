@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "pcache\\": "src/"
+            "Soranoba\\Pcache\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\pcache\\": "tests/"
+            "Tests\\Soranoba\\Pcache\\": "tests/"
         }
     }
 }

@@ -3,18 +3,18 @@
  * @copyright 2016 Hinagiku Soranoba All Rights Reserved.
  */
 
-namespace pcache\Middleware;
+namespace Soranoba\Pcache\Middleware;
 
-use pcache\Middleware;
-use pcache\TTL;
+use Soranoba\Pcache\Middleware;
+use Soranoba\Pcache\TTL;
 
 /**
  * Class Memcached
  *
- * @see \pcache\Cache::instance()
+ * @see \Soranoba\Pcache\Cache::instance()
  *
  * options:
- *    servers (require)  array : list of array(hostname(string), port(integer), weight(integer))
+ *    servers (require)  array : list of array(hostname(string), port(integer))
  */
 class Memcached implements Middleware
 {
@@ -41,14 +41,14 @@ class Memcached implements Middleware
 
     public static function instanceName($options)
     {
-        $servers = @$options[self::SERVERS_KEY] ?: array();
-        usort($servers, function ($a, $b) {
-            // FIXME: this is memcached format...=(
-            if (!(is_array($a) && count($a) == 3 && is_array($b) && count($b) == 3)) {
-                return 0; // invalid. So, it may be what the return value.
-            }
+        $name = "";
+        $servers = @$options[self::SERVERS_KEY];
+        if (!is_array($servers)) {
+            return $name;
+        }
 
-            for ($i = 0; $i < 3; $i++) {
+        usort($servers, function ($a, $b) {
+            for ($i = 0; $i < min(count($a), count($b)); $i++) {
                 if ($a[$i] == $b[$i]) {
                     continue;
                 }
@@ -57,19 +57,18 @@ class Memcached implements Middleware
             return 0;
         });
 
-        $name = "";
         foreach ($servers as $server) {
             if (!is_array($server)) {
                 continue;
             }
-            foreach ($server as $val) {
-                $name .= strval($val);
+            for ($i = 0; $i < 2; $i++) { // ip & port
+                $name .= strval($server[$i]);
                 $name .= ":";
             }
             $name = rtrim($name, ":");
             $name .= "+";
         }
-        // e.g. IP:PORT:Weight+IP:PORT:Weight
+        // e.g. IP:PORT+IP:PORT
         return rtrim($name, "+");
     }
 

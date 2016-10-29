@@ -4,10 +4,10 @@
  * @copyright 2016 Hinagiku Soranoba All Rights Reserved.
  */
 
-namespace Tests\pcache;
+namespace Tests\Soranoba\Pcache;
 
-use pcache\Cache;
-use pcache\TTL;
+use Soranoba\Pcache\Cache;
+use Soranoba\Pcache\TTL;
 
 abstract class MiddlewareTest extends \PHPUnit_Framework_TestCase
 {

@@ -3,11 +3,11 @@
  * @copyright 2016 Hinagiku Soranoba All Rights Reserved.
  */
 
-namespace Tests\pcache\Middleware;
+namespace Tests\Soranoba\Pcache\Middleware;
 
-use pcache\Cache;
-use pcache\Middleware\Redis;
-use Tests\pcache\MiddlewareTest;
+use Soranoba\Pcache\Cache;
+use Soranoba\Pcache\Middleware\Redis;
+use Tests\Soranoba\Pcache\MiddlewareTest;
 
 class RedisTest extends MiddlewareTest
 {

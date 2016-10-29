@@ -3,10 +3,10 @@
  * @copyright 2016 Hinagiku Soranoba All Rights Reserved.
  */
 
-namespace Tests\pcache;
+namespace Tests\Soranoba\Pcache;
 
-use pcache\Cache;
-use pcache\Middleware;
+use Soranoba\Pcache\Cache;
+use Soranoba\Pcache\Middleware;
 
 class CacheTest extends \PHPUnit_Framework_TestCase
 {

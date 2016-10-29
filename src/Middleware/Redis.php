@@ -3,15 +3,15 @@
  * @copyright 2016 Hinagiku Soranoba All Rights Reserved.
  */
 
-namespace pcache\Middleware;
+namespace Soranoba\pcache\Middleware;
 
-use pcache\Middleware;
-use pcache\TTL;
+use Soranoba\Pcache\Middleware;
+use Soranoba\Pcache\TTL;
 
 /**
  * Class Redis
  *
- * @see \pcache\Cache::instance()
+ * @see \Soranoba\Pcache\Cache::instance()
  *
  * options:
  *    dest    (require)  string  : Hostname, ip or unix domain socket path.

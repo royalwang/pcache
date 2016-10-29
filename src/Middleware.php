@@ -3,10 +3,10 @@
  * @copyright 2016 Hinagiku Soranoba All Rights Reserved.
  */
 
-namespace pcache;
+namespace Soranoba\Pcache;
 
 /**
- * Middleware interface of \pcache\Cache
+ * Middleware interface of \Soranoba\Pcache\Cache
  */
 interface Middleware
 {

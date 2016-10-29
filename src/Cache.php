@@ -3,12 +3,12 @@
  * @copyright 2016 Hinagiku Soranoba All Rights Reserved.
  */
 
-namespace pcache;
+namespace Soranoba\Pcache;
 
 /**
  * Cache class.
  *
- * @see \pcache\Cache::instance()
+ * @see \Soranoba\Pcache\Cache::instance()
  */
 class Cache
 {
