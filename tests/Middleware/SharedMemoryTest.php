@@ -15,7 +15,7 @@ class SharedMemoryTest extends MiddlewareTest
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        $this->cache = Cache::instance("SharedMemory", [SharedMemory::OPEN_KEY => 1024]);
+        $this->cache = Cache::instance(SharedMemory::class, [SharedMemory::OPEN_KEY => 1024]);
     }
 
     public function testAutoExtension()

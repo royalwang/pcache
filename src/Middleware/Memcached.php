@@ -8,6 +8,14 @@ namespace pcache\Middleware;
 use pcache\Middleware;
 use pcache\TTL;
 
+/**
+ * Class Memcached
+ *
+ * @see \pcache\Cache::instance()
+ *
+ * options:
+ *    servers (require)  array : list of array(hostname(string), port(integer), weight(integer))
+ */
 class Memcached implements Middleware
 {
     const SERVERS_KEY = "servers";

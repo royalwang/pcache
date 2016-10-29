@@ -31,18 +31,25 @@ class Cache
 
     /**
      * Return the Singleton Object.
+     * @param string $middleware
+     * @param array $options
      * @return Cache
      */
     public static function instance($middleware, $options)
     {
-        static $instance = array();
+        static $instances = array();
 
+        $instance = null;
         $instanceName = self::instanceName($middleware, $options);
-        if (isset($instance[$middleware][$instanceName])) {
-            return $instance[$middleware][$instanceName];
+
+        if (isset($instances[$middleware][$instanceName])) {
+            $instance = $instances[$middleware][$instanceName];
         } else {
-            return ($instance[$middleware][$instanceName] = new self($middleware, $options));
+            $instance = ($instances[$middleware][$instanceName] = new self($middleware, $options));
         }
+
+        $instance->middleware->setUp($options);
+        return $instance;
     }
 
     /**
@@ -115,12 +122,13 @@ class Cache
     //==========================================================================================================//
 
     /**
-     * @param $middleware
+     * validate the class.
+     *
+     * @param string $className
      * @return string
      */
-    private static function middlewareClass($middleware)
+    private static function middlewareClass($className)
     {
-        $className = __NAMESPACE__ . '\\Middleware\\' . $middleware;
         if (!class_exists($className)) {
             throw new \RuntimeException($className . " is not found");
         }

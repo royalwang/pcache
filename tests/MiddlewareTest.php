@@ -58,6 +58,13 @@ abstract class MiddlewareTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $this->cache->get($key));
     }
 
+    public function testTtlNotExist()
+    {
+        $key = __METHOD__;
+        $this->assertEquals(false, $this->cache->get($key));
+        $this->assertEquals(false, $this->cache->ttl($key, 1000));
+    }
+
     public function testGetAllDeleteAll()
     {
         $key = __METHOD__;
