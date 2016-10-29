@@ -16,7 +16,7 @@ class MemcacheTest extends MiddlewareTest
         parent::__construct($name, $data, $dataName);
         $this->cache = Cache::instance(Memcached::class, [
             Memcached::SERVERS_KEY => [
-                ["127.0.0.1", 11211, 100]
+                ["127.0.0.1", 11212, 100]
             ]
         ]);
     }
@@ -24,24 +24,24 @@ class MemcacheTest extends MiddlewareTest
     public function testInstanceName()
     {
         $this->assertEquals(
-            "127.0.0.1:11211:100+127.0.0.1:11212:50+127.0.0.1:11212:100+localhost:11212:20",
+            "127.0.0.1:11212:100+127.0.0.1:11213:50+127.0.0.1:11213:100+localhost:11213:20",
             Memcached::instanceName([
                 Memcached::SERVERS_KEY => [
+                    ["127.0.0.1", 11213, 100],
                     ["127.0.0.1", 11212, 100],
-                    ["127.0.0.1", 11211, 100],
-                    ["localhost", 11212, 20],
-                    ["127.0.0.1", 11212, 50],
+                    ["localhost", 11213, 20],
+                    ["127.0.0.1", 11213, 50],
                 ]
             ])
         );
         $this->assertEquals(
-            "127.0.0.1:11211:100+127.0.0.1:11212:50+127.0.0.1:11212:100+localhost:11212:20",
+            "127.0.0.1:11212:100+127.0.0.1:11213:50+127.0.0.1:11213:100+localhost:11213:20",
             Memcached::instanceName([
                 Memcached::SERVERS_KEY => [
-                    ["localhost", 11212, 20],
-                    ["127.0.0.1", 11211, 100],
-                    ["127.0.0.1", 11212, 50],
+                    ["localhost", 11213, 20],
                     ["127.0.0.1", 11212, 100],
+                    ["127.0.0.1", 11213, 50],
+                    ["127.0.0.1", 11213, 100],
                 ]
             ])
         );

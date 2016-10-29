@@ -26,7 +26,7 @@ class SharedMemory implements Middleware
 
     const VALUE = "v";
     const EXPIRES = "e";
-    const DEFAULT_SIZE = 10 * 1024; // 1kB
+    const DEFAULT_SIZE = 10240; // 1kB
 
     /**
      * @var int $shmid

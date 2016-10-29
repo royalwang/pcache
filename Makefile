@@ -18,8 +18,8 @@ test: before-test main-test after-test
 
 before-test:
 	docker run --name $(REDIS)      -p 6379:6379   -d redis:3.2.4
-	docker run --name $(MEMCACHED1) -p 11211:11211 -d memcached:1.4.32
-	docker run --name $(MEMCACHED2) -p 11212:11211 -d memcached:1.4.32
+	docker run --name $(MEMCACHED1) -p 11212:11211 -d memcached:1.4.32
+	docker run --name $(MEMCACHED2) -p 11213:11211 -d memcached:1.4.32
 
 after-test:
 	docker stop $(REDIS)
