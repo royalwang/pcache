@@ -36,4 +36,4 @@ cs-check:
 	$(BIN)/phpcs
 
 cs-fix:
-	$(BIN)/phpcbf || true
+	$(BIN)/phpcbf; true
