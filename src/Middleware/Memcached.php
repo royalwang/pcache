@@ -90,29 +90,35 @@ class Memcached implements Middleware
     public function set($key, $value, $ttl = TTL::INFINITY)
     {
         if ($ttl == TTL::INFINITY) {
-            $this->memcached->set($key, $value);
+            return $this->memcached->set($key, $value);
         } else {
-            $this->memcached->set($key, $value, time() + $ttl);
+            return $this->memcached->set($key, $value, time() + $ttl);
         }
     }
 
     public function ttl($key, $ttl = TTL::INFINITY)
     {
         if (($value = $this->memcached->get($key)) !== false) {
-            $this->memcached->set($key, $value, ($ttl == TTL::INFINITY ? 0 : time() + $ttl));
+            return $this->memcached->set($key, $value, ($ttl == TTL::INFINITY ? 0 : time() + $ttl));
         }
+        return false;
     }
 
     public function delete($key)
     {
-        $this->memcached->delete($key);
+        return $this->memcached->delete($key);
     }
 
     public function deleteAll()
     {
         if (($keys = $this->getAllKeys()) !== false) {
-            $this->memcached->deleteMulti($keys);
+            $count = 0;
+            foreach (($this->memcached->deleteMulti($keys) ?: array()) as $key => $value) {
+                $count += (int)$value; // bool to integer
+            }
+            return count($keys) == $count;
         }
+        return false;
     }
 
     //==========================================================================================================//
@@ -159,16 +165,17 @@ class Memcached implements Middleware
      * @param $cmd string command string that you want to execute.
      * @return string[]|bool Returns the response split with a newline. If the cmd failed, return false.
      */
-    private static function exec($fp, $cmd) {
+    private static function exec($fp, $cmd)
+    {
         if (!fwrite($fp, $cmd . "\n")) {
             return false;
         }
         $ret = array();
-        while(!feof($fp)) {
+        while (!feof($fp)) {
             $line = trim(fgets($fp));
             if ($line == "END") {
                 break;
-            } else if (strpos($line, "ERROR") === 0) {
+            } elseif (strpos($line, "ERROR") === 0) {
                 break;
             }
             $ret[] = $line;

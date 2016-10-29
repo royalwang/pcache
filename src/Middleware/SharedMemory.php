@@ -93,10 +93,12 @@ class SharedMemory implements Middleware
     public function deleteAll()
     {
         if ($this->shmid) {
-            shmop_delete($this->shmid);
+            $ret = shmop_delete($this->shmid);
             shmop_close($this->shmid);
             $this->shmid = 0;
+            return $ret;
         }
+        return true; // Already deleted.
     }
 
     public function get($key)
@@ -117,17 +119,21 @@ class SharedMemory implements Middleware
     public function set($key, $value, $ttl = TTL::INFINITY)
     {
         $this->exists();
-        $obj = $this->read();
+        if (($obj = $this->read()) === false) {
+            return false;
+        }
         $obj = $this->updateObject($obj, $key, $value, $ttl);
-        $this->write($obj);
+        return $this->write($obj);
     }
 
     public function delete($key)
     {
         $this->exists();
-        $obj = $this->read();
+        if (($obj = $this->read()) == false) {
+            return false;
+        }
         unset($obj[$key]);
-        $this->write($obj);
+        return $this->write($obj);
     }
 
     public function ttl($key, $ttl = TTL::INFINITY)
@@ -138,7 +144,7 @@ class SharedMemory implements Middleware
             return;
         }
         $obj = $this->updateObject($obj, $key, $obj[$key][self::VALUE], $ttl);
-        $this->write($obj);
+        return $this->write($obj);
     }
 
     public function getAll()
@@ -212,11 +218,13 @@ class SharedMemory implements Middleware
 
     /**
      * Read the shared memory.
-     * @return array
+     * @return array|boolean If it is success, return array. Otherwise, return false.
      */
     private function read()
     {
-        $readObj = shmop_read($this->shmid, 0, $this->size);
+        if (($readObj = shmop_read($this->shmid, 0, $this->size)) === false) {
+            return false;
+        }
         $index = strpos($readObj, "\0");
         return $index ? unserialize(substr($readObj, 0, $index)) : array();
     }
@@ -225,6 +233,7 @@ class SharedMemory implements Middleware
      * Write the shared memory.
      *
      * @param array $obj
+     * @return boolean
      */
     private function write(array $obj)
     {
@@ -236,6 +245,6 @@ class SharedMemory implements Middleware
             $this->deleteAll();
             $this->open();
         }
-        shmop_write($this->shmid, $serializedObj, 0);
+        return shmop_write($this->shmid, $serializedObj, 0) !== false;
     }
 }

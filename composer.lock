@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f46ceb7ae3a54d2b0b78300739f5f638",
-    "content-hash": "1efe1f086fcf2e323f15ed80c76529ee",
+    "hash": "f8486dd0d594cf4416d8cd06169c5e2e",
+    "content-hash": "6d117d2389dee3a31d647705c47966b3",
     "packages": [],
     "packages-dev": [
         {
@@ -563,12 +563,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c4d334af83710a48d3c39728d515c99413598034"
+                "reference": "b0c4a96b3eca878a7fe1537d1b6fd1175dccd434"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c4d334af83710a48d3c39728d515c99413598034",
-                "reference": "c4d334af83710a48d3c39728d515c99413598034",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b0c4a96b3eca878a7fe1537d1b6fd1175dccd434",
+                "reference": "b0c4a96b3eca878a7fe1537d1b6fd1175dccd434",
                 "shasum": ""
             },
             "require": {
@@ -637,7 +637,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-10-09 13:28:23"
+            "time": "2016-10-25 07:41:28"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1217,12 +1217,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "cf1d7fe370c7320695318b397f8688d6598cd27c"
+                "reference": "5a1a5a43e1e4efa856a761266e6d0f6af5c15efb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/cf1d7fe370c7320695318b397f8688d6598cd27c",
-                "reference": "cf1d7fe370c7320695318b397f8688d6598cd27c",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/5a1a5a43e1e4efa856a761266e6d0f6af5c15efb",
+                "reference": "5a1a5a43e1e4efa856a761266e6d0f6af5c15efb",
                 "shasum": ""
             },
             "require": {
@@ -1287,7 +1287,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2016-10-20 21:55:22"
+            "time": "2016-10-28 00:29:44"
         },
         {
             "name": "symfony/yaml",
@@ -1295,12 +1295,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "3d42c56f989688ad0790dcdc3c706d60748af6a6"
+                "reference": "d2cab32980d8de786744fabdec95991a0ebd7ea8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/3d42c56f989688ad0790dcdc3c706d60748af6a6",
-                "reference": "3d42c56f989688ad0790dcdc3c706d60748af6a6",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/d2cab32980d8de786744fabdec95991a0ebd7ea8",
+                "reference": "d2cab32980d8de786744fabdec95991a0ebd7ea8",
                 "shasum": ""
             },
             "require": {
@@ -1342,7 +1342,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-10-21 21:10:51"
+            "time": "2016-10-24 18:44:12"
         },
         {
             "name": "webmozart/assert",
@@ -1401,9 +1401,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6",
+        "php": ">=5.5",
         "ext-redis": "^2.2",
-        "ext-memcache": "^2.2"
+        "ext-memcached": "^2.2"
     },
     "platform-dev": []
 }

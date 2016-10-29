@@ -87,7 +87,7 @@ class Redis implements Middleware
     {
         $ret = array();
         foreach ($this->redis->getKeys("*") as $key) {
-            if ($value = $this->get($key)) {
+            if (($value = $this->get($key)) !== false) {
                 $ret[$key] = $value;
             }
         }
@@ -97,24 +97,24 @@ class Redis implements Middleware
     public function set($key, $value, $ttl = TTL::INFINITY)
     {
         if ($ttl == TTL::INFINITY) {
-            $this->redis->set($key, $value);
+            return $this->redis->set($key, $value);
         } else {
-            $this->redis->set($key, $value, $ttl);
+            return $this->redis->set($key, $value, $ttl);
         }
     }
 
     public function ttl($key, $ttl = TTL::INFINITY)
     {
-        $this->redis->setTimeout($key, $ttl);
+        return $this->redis->setTimeout($key, $ttl);
     }
 
     public function delete($key)
     {
-        $this->redis->delete($key);
+        return (bool)$this->redis->delete($key);
     }
 
     public function deleteAll()
     {
-        $this->redis->flushAll();
+        return $this->redis->flushAll();
     }
 }

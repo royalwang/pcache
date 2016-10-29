@@ -5,14 +5,14 @@ REDIS      := pcache-test-redis
 MEMCACHED1 := pcache-test-memcached1
 MEMCACHED2 := pcache-test-memcached2
 
-all: init test cs-fix cs-check
+all: init test cs-check
 
 init:
-	php -n $(COMPOSER) install
-	php -n $(COMPOSER) validate
+	$(COMPOSER) install
+	$(COMPOSER) validate
 
 update:
-	php -n $(COMPOSER) update
+	$(COMPOSER) update
 
 test: before-test main-test after-test
 

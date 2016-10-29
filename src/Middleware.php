@@ -49,7 +49,7 @@ interface Middleware
 
     /**
      * Return all key-values.
-     * @return string[string]
+     * @return string[string]|boolean
      */
     public function getAll();
 
@@ -59,6 +59,7 @@ interface Middleware
      * @param string $key
      * @param string $value
      * @param int $ttl
+     * @return boolean
      */
     public function set($key, $value, $ttl = TTL::INFINITY);
 
@@ -67,6 +68,7 @@ interface Middleware
      *
      * @param string $key
      * @param int $ttl
+     * @return boolean
      */
     public function ttl($key, $ttl = TTL::INFINITY);
 
@@ -74,11 +76,13 @@ interface Middleware
      * delete the key-value.
      *
      * @param string $key
+     * @return boolean
      */
     public function delete($key);
 
     /**
      * delete all key-values.
+     * @return boolean
      */
     public function deleteAll();
 }

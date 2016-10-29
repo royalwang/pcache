@@ -58,7 +58,7 @@ class Cache
 
     /**
      * Return all key-values.
-     * @return string[string]
+     * @return string[string]|bool If it is success, return all keys-values. Otherwise, return false.
      */
     public function getAll()
     {
@@ -71,10 +71,11 @@ class Cache
      * @param string $key
      * @param string $value
      * @param int $ttl
+     * @return boolean If it is success, return true. Otherwise, return false.
      */
     public function set($key, $value, $ttl = TTL::INFINITY)
     {
-        $this->middleware->set($key, $value, $ttl);
+        return $this->middleware->set($key, $value, $ttl);
     }
 
     /**
@@ -82,28 +83,31 @@ class Cache
      *
      * @param string $key
      * @param int $ttl
+     * @return boolean If it is success, return true. Otherwise, return false.
      */
     public function ttl($key, $ttl = TTL::INFINITY)
     {
-        $this->middleware->ttl($key, $ttl);
+        return $this->middleware->ttl($key, $ttl);
     }
 
     /**
      * delete the key-value.
      *
      * @param string $key
+     * @return boolean If it is success, return true. Otherwise (e.g. the key doesn't exist), return false.
      */
     public function delete($key)
     {
-        $this->middleware->delete($key);
+        return $this->middleware->delete($key);
     }
 
     /**
      * delete all key-values.
+     * @return boolean If it is success, return true. Otherwise, return false.
      */
     public function deleteAll()
     {
-        $this->middleware->deleteAll();
+        return $this->middleware->deleteAll();
     }
 
     //==========================================================================================================//

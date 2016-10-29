@@ -33,7 +33,8 @@ abstract class MiddlewareTest extends \PHPUnit_Framework_TestCase
     {
         $key = __METHOD__;
         $value = "test_value";
-        $this->cache->set($key, $value);
+        $this->assertEquals(false, $this->cache->get($key));
+        $this->assertEquals(true, $this->cache->set($key, $value));
         $this->assertEquals($value, $this->cache->get($key));
     }
 
@@ -41,7 +42,7 @@ abstract class MiddlewareTest extends \PHPUnit_Framework_TestCase
     {
         $key = __METHOD__;
         $value = "test_value";
-        $this->cache->set($key, $value, 1 * TTL::SEC);
+        $this->assertEquals(true, $this->cache->set($key, $value, 1 * TTL::SEC));
         sleep(2);
         $this->assertEquals(false, $this->cache->get($key));
     }
@@ -50,8 +51,8 @@ abstract class MiddlewareTest extends \PHPUnit_Framework_TestCase
     {
         $key = __METHOD__;
         $value = "test_value";
-        $this->cache->set($key, $value);
-        $this->cache->ttl($key, 2 * TTL::SEC);
+        $this->assertEquals(true, $this->cache->set($key, $value));
+        $this->assertEquals(true, $this->cache->ttl($key, 2 * TTL::SEC));
         $this->assertEquals($value, $this->cache->get($key));
         sleep(4);
         $this->assertEquals(false, $this->cache->get($key));
@@ -63,11 +64,11 @@ abstract class MiddlewareTest extends \PHPUnit_Framework_TestCase
         $value = "test_value";
         $obj = array();
         for ($i = 0; $i < 10; $i++) {
-            $this->cache->set($key . $i, $value);
+            $this->assertEquals(true, $this->cache->set($key . $i, $value));
             $obj[$key . $i] = $value;
         }
         $this->assertEquals($obj, $this->cache->getAll());
-        $this->cache->deleteAll();
+        $this->assertEquals(true, $this->cache->deleteAll());
         for ($i = 0; $i < 10; $i++) {
             $this->assertEquals(false, $this->cache->get($key . $i));
         }
@@ -77,9 +78,20 @@ abstract class MiddlewareTest extends \PHPUnit_Framework_TestCase
     {
         $key = __METHOD__;
         $value = "test_value";
-        $this->cache->set($key, $value);
+        $this->assertEquals(true, $this->cache->set($key, $value));
         $this->assertEquals($value, $this->cache->get($key));
-        $this->cache->delete($key);
+        $this->assertEquals(true, $this->cache->delete($key));
         $this->assertEquals(false, $this->cache->get($key));
+    }
+
+    public function testDuplicateDelete()
+    {
+        $key = __METHOD__;
+        $value = "test_value";
+        $this->assertEquals(true, $this->cache->set($key, $value));
+        $this->assertEquals(true, $this->cache->delete($key));
+        $this->assertEquals(false, $this->cache->delete($key));
+        $this->assertEquals(true, $this->cache->deleteAll());
+        $this->assertEquals(true, $this->cache->deleteAll());
     }
 }
